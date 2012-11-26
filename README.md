@@ -19,6 +19,9 @@ Usage
 
 Output
 ======
+
+Output is in a CSV text file in the format:
+
     date,unique visitors
     2004-12-01,6271
     2004-12-02,6327
@@ -38,6 +41,7 @@ Output
 Notes
 =====
 * Initial importer.py and models.py created by Adam Clark.
+* Directory you write to must have permissions that allow writing.
 
 Links
 =====
