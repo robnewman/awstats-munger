@@ -1,10 +1,4 @@
-from WebsiteStats import settings
-from WebsiteStats.stats.models import SourceFile, Quake, Day, Month
 from datetime import date, datetime, time
-from django.core.exceptions import ObjectDoesNotExist
-from django.core.serializers import deserialize
-from django.db.models.aggregates import Max
-from django.utils.log import logger
 from genericpath import isfile, isdir
 from glob import glob
 from urlparse import urljoin
