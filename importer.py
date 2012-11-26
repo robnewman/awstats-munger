@@ -8,6 +8,7 @@ import os.path
 import re
 import string
 import urllib2
+import time
 
 
 STATFILE_GLOB = 'data/awstats*.txt'
@@ -170,3 +171,59 @@ class AWStatsCollector(object):
                 self.read_file(filename)
             else:
                 logger.info("No updates for {0}".format(filename))
+
+class CSVReader(object):
+    """
+    Object that reads the output CSV file and appends
+    data for new days
+
+    Format for the file is:
+    date,visitors
+    YYYY-MM-DD,123456
+
+    At some point we can expand this from just
+    visits to include:
+    * pages
+    * hits
+    * bandwidth
+
+    Does not include unique visitors either
+    """
+
+    def __init__(self, filename):
+        try:
+            with open(filename) as f:
+                pass
+        except IOError:
+            print "Error reading file '%s'" % filename
+        else:
+            self.filename = filename
+            with open(filename) as f:
+                self.data = f.read()
+
+    def read_lines(self):
+        daily_entries = {}
+        for day_line in self.data.split("\n"):
+            try:
+                date_str, visitors = day_line.split(",")
+            except Exception:
+                pass
+            else:
+                try:
+                    time.strptime(date_str, "%Y-%m-%d")
+                except Exception:
+                    pass
+                else:
+                    daily_entries[date_str] = visitors
+        return daily_entries
+
+    def print_entries(self, entries_dict):
+        for k in sorted(entries_dict.iterkeys()):
+            print k, entries_dict[k]
+
+    def write_entries(self, entries_dict):
+        file_ptr = open(self.filename, 'w+')
+        print>>file_ptr, 'date,unique visitors'
+        for entry in sorted(entries_dict.iterkeys()):
+            print>>file_ptr, "%s,%s" % (entry, entries_dict[entry])
+        file_ptr.close()
