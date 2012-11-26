@@ -1,8 +1,10 @@
 awstats-munger
 ==============
 
-Python scripts to munge awstats flat files and output in CSV and possibly 
-into Django MTV
+Python scripts to munge awstats flat files and output in CSV 
+and possibly into Django MTV.
+
+CSV output is designed for easy integration with DyGraphs.
 
 Usage
 =====
@@ -19,4 +21,5 @@ Notes
 
 Links
 =====
-* http://awstats.sourceforge.net/
+* [AWStats](http://awstats.sourceforge.net/)
+* [DyGraphs](http://dygraphs.com/)
