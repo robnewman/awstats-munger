@@ -1,12 +1,28 @@
 awstats-munger
 ==============
 
-Python scripts to munge awstats flat files and output in CSV 
+Python scripts to munge awstats flat files and output in CSV
 and possibly into Django MTV.
 
 The process.py script expects awstats to be in [day format](http://www.internetofficer.com/awstats/daily-stats/).
 
 CSV output is designed for easy integration with DyGraphs.
+
+Prerequisites
+=============
+
+You must create your Awstats database files on a day-by-day
+basis instead of monthly in order to get the unique-visitor
+statistic. This statistic is not currently available in the
+default monthly view.
+
+Below is an example of how you would do this:
+
+    perl /path/to/awstats.pl -config=hostname -update -databasebreak=day
+    Create/Update database for config "/path/to/awstats.hostname.conf" by AWStats...
+    From data in log file...
+    Phase 1 : First bypass old records, searching new record...
+    Searching new records from beginning of log file...
 
 Usage
 =====
