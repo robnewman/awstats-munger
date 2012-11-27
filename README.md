@@ -1,20 +1,20 @@
 awstats-munger
 ==============
 
-Python scripts to munge awstats flat files and output in CSV
-and possibly into Django MTV.
+Python scripts to munge awstats flat files and output in CSV and
+possibly into Django MTV (future plans).
 
-The process.py script expects awstats to be in [day format](http://www.internetofficer.com/awstats/daily-stats/).
+The command line process.py script expects awstats to be in [day format](http://www.internetofficer.com/awstats/daily-stats/).
 
 CSV output is designed for easy integration with DyGraphs.
 
 Prerequisites
 =============
 
-You must create your Awstats database files on a day-by-day
-basis instead of monthly in order to get the unique-visitor
-statistic. This statistic is not currently available in the
-default monthly view.
+You must create your AWstats database files on a day-by-day basis
+instead of monthly in order to get the unique-visitor statistic.
+This statistic is not currently available in the default monthly
+view.
 
 Below is an example of how you would do this:
 
@@ -38,21 +38,21 @@ Output
 
 Output is in a CSV text file in the format:
 
-    date,unique visitors
-    2004-12-01,6271
-    2004-12-02,6327
-    2004-12-03,5514
-    2004-12-04,4480
-    2004-12-05,5699
-    2004-12-06,6957
+    date,total visitors,unique visitors
+    2004-12-01,6271,6000
+    2004-12-02,6327,6000
+    2004-12-03,5514,5000
+    2004-12-04,4480,4000
+    2004-12-05,5699,5000
+    2004-12-06,6957,6000
     ....
-    2012-11-02,32958
-    2012-11-03,30458
-    2012-11-04,33623
-    2012-11-05,36335
-    2012-11-06,36170
-    2012-11-07,57518
-    2012-11-08,49356
+    2012-11-02,32958,30000
+    2012-11-03,30458,30000
+    2012-11-04,33623,30000
+    2012-11-05,36335,30000
+    2012-11-06,36170,30000
+    2012-11-07,57518,50000
+    2012-11-08,49356,40000
 
 Notes
 =====
