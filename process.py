@@ -79,7 +79,7 @@ def main():
     if datetime_str not in list(entries.keys()):
         if verbosity:
             logfmt("Date '%s' not found, appending..." % datetime_str)
-        entries[datetime_str] = total_visitors
+        entries[datetime_str] = [total_visitors, unique_visitors]
         try:
             csv.write_entries(entries)
         except Exception, e:
