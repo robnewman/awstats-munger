@@ -223,7 +223,7 @@ class CSVReader(object):
 
     def write_entries(self, entries_dict):
         file_ptr = open(self.filename, 'w+')
-        print>>file_ptr, 'date,unique visitors'
+        print>>file_ptr, 'date,total visitors'
         for entry in sorted(entries_dict.iterkeys()):
             print>>file_ptr, "%s,%s" % (entry, entries_dict[entry])
         file_ptr.close()
