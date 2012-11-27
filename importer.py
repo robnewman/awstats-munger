@@ -205,16 +205,23 @@ class CSVReader(object):
         daily_entries = {}
         for day_line in self.data.split("\n"):
             try:
-                date_str, visitors = day_line.split(",")
+                # date_str, visitors, uniq_visitors = day_line.split(",")
+                day_stats = day_line.split(",")
             except Exception:
                 pass
             else:
                 try:
-                    time.strptime(date_str, "%Y-%m-%d")
+                    time.strptime(day_stats[0], "%Y-%m-%d")
                 except Exception:
                     pass
                 else:
-                    daily_entries[date_str] = visitors
+                    date_str = day_stats[0]
+                    visitors = day_stats[1]
+                    if len(day_stats) > 2:
+                        uniq_visitors = day_stats[2]
+                        daily_entries[date_str] = [visitors, uniq_visitors]
+                    else:
+                        daily_entries[date_str] = [visitors]
         return daily_entries
 
     def print_entries(self, entries_dict):
@@ -223,7 +230,10 @@ class CSVReader(object):
 
     def write_entries(self, entries_dict):
         file_ptr = open(self.filename, 'w+')
-        print>>file_ptr, 'date,total visitors'
+        print>>file_ptr, 'date,total visitors,unique visitors'
         for entry in sorted(entries_dict.iterkeys()):
-            print>>file_ptr, "%s,%s" % (entry, entries_dict[entry])
+            if len(entries_dict[entry]) > 1:
+                print>>file_ptr, "%s,%s,%s" % (entry, entries_dict[entry][0], entries_dict[entry][1])
+            else:
+                print>>file_ptr, "%s,%s" % (entry, entries_dict[entry][0])
         file_ptr.close()
